@@ -1,0 +1,17 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xyz="http://www.mulesoft.org/schema/mule/xyz"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/xyz http://www.mulesoft.org/schema/mule/xyz/current/mule-xyz.xsd">
+
+    <xyz:config name="config" host="api.keyvalue.xyz" />
+
+    <flow name="storeFlow">
+        <xyz:store value="bla" key="bla" config-ref="config"/>
+    </flow>
+
+    <flow name="retrieveFlow">
+        <xyz:retrieve token="bla" key="bla" config-ref="config"/>
+    </flow>
+
+</mule>

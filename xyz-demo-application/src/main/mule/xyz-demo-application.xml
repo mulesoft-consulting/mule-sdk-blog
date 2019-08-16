@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xyz="http://www.mulesoft.org/schema/mule/xyz" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xyz http://www.mulesoft.org/schema/mule/xyz/current/mule-xyz.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<xyz:config name="config" host="api.keyvalue.xyz" />
+
+	<flow name="xyz-test-appFlow">
+		<scheduler>
+			<scheduling-strategy>
+				<fixed-frequency />
+			</scheduling-strategy>
+		</scheduler>
+
+		<xyz:store key="BLA" value="BLABLA" config-ref="config" />
+
+		<logger level="INFO" message="After store: #[payload]" />
+
+		<xyz:retrieve token="#[payload.token]" key="#[payload.key]" config-ref="config" />
+
+		<logger level="INFO" message="After retrieve: #[payload]" />
+	</flow>
+
+</mule>
